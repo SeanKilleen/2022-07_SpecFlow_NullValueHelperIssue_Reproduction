@@ -1,7 +1,20 @@
 ﻿using FluentAssertions;
 using TechTalk.SpecFlow;
+using TechTalk.SpecFlow.Assist;
+using TechTalk.SpecFlow.Assist.ValueRetrievers;
 
 namespace SpecFlowTests;
+
+[Binding]
+public static class NullValueHooks
+{
+
+    [BeforeTestRun]
+    public static void BeforeTestRun()
+    {
+        Service.Instance.ValueRetrievers.Register(new NullValueRetriever("<null>"));
+    }
+}
 
 [Binding]
 public class TestFeatureSteps
